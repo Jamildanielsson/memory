@@ -13,6 +13,7 @@ const App = () => {
   const [gameWon, setGameWon] = useState(false);
   const [matchedPairs, setMatchedPairs] = useState(0);
   const [clickedCard, setClickedCard] = useState<undefined | CardType>(undefined);
+  const [attempts, setAttempts] = useState<number>(0);
 
     useEffect(() => {
     if (matchedPairs === cards.length / 2) {
@@ -44,6 +45,8 @@ const App = () => {
       return;
     }
 
+    setAttempts(prev => prev + 1);
+
     setTimeout(() => {
       setCards(prev =>
         prev.map(card =>
@@ -61,19 +64,21 @@ const App = () => {
     setCards(shuffleArray(createBoard()));
     setMatchedPairs(0);
     setGameWon(false);
+    setAttempts(0);
   };
 
   return (
     <div>
       <div className='header'>
-        <h1>Alba's Memory</h1>
+        <h1>Cute Cat Memory</h1>
+        <p>Current attempts: {attempts}</p>
       </div>
       <Grid>
         {cards.map(card => (
           <Card key={card.id} card={card} callback={handleCardClick} />
         ))}
       </Grid>
-      <GameOverlay gameWon={gameWon} onPlayAgain={handlePlayAgain} />
+      <GameOverlay gameWon={gameWon} onPlayAgain={handlePlayAgain} attempts={attempts} />
     </div>
   );
 };

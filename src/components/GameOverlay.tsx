@@ -4,6 +4,7 @@ import styled from 'styled-components';
 type Props = {
   gameWon: boolean;
   onPlayAgain: () => void;
+  attempts: number;
 };
 
 const Overlay = styled.div<{ visible: boolean }>`
@@ -36,10 +37,11 @@ const Button = styled.button`
   }
 `;
 
-const GameOverlay: React.FC<Props> = ({ gameWon, onPlayAgain }) => (
+const GameOverlay: React.FC<Props> = ({ gameWon, onPlayAgain, attempts }) => (
   <Overlay visible={gameWon}>
-    <h1>Du vann spelet!</h1>
-    <Button onClick={onPlayAgain}>Spela igen</Button>
+    <h1>You won!</h1>
+    <p>Total attempts: {attempts}</p>
+    <Button onClick={onPlayAgain}>Play again!</Button>
   </Overlay>
 );
 
