@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Card from "./components/Card";
 import { createBoard } from "./setup";
 import { shuffleArray } from "./utils";
@@ -17,6 +17,7 @@ const App = () => {
   useEffect(() => {
     if (matchedPairs === cards.length / 2) {
       console.log("Game Won!");
+      console.log(gameWon)
       setGameWon(true);
     }
   }, [matchedPairs]);
